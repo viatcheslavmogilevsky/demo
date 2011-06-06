@@ -106,6 +106,61 @@ describe UsersController do
       response.should have_selector("h1>img", :class => "gravatar")
      end	
    end
-  
+   
+   describe "GET 'edit'" do
 
+    before(:each) do
+      @user = Factory(:user)
+      test_sign_in(@user)
+    end
+
+    it "should be successful" do
+      get :edit, :id => @user
+      response.should be_success
+    end
+
+    it "should have the right title" do
+      get :edit, :id => @user
+      response.should have_selector("title", :content => "Edit user")
+    end
+
+    it "should have a link to change the Gravatar" do
+      get :edit, :id => @user
+      gravatar_url = "http://gravatar.com/emails"
+      response.should have_selector("a", :href => gravatar_url,
+                                         :content => "change")
+    end
+   end  
+  describe "GET 'index'" do
+
+    
+
+    describe "for signed-in users" do
+
+      before(:each) do
+        @user = test_sign_in(Factory(:user))
+        second = Factory(:user, :name => "Bob", :email => "another@example.com")
+        third  = Factory(:user, :name => "Ben", :email => "another@example.net")
+
+        @users = [@user, second, third]
+      end
+
+      it "should be successful" do
+        get :index
+        response.should be_success
+      end
+
+      it "should have the right title" do
+        get :index
+        response.should have_selector("title", :content => "All users")
+      end
+
+      it "should have an element for each user" do
+        get :index
+        @users.each do |user|
+          response.should have_selector("li", :content => user.name)
+        end
+      end
+    end
+  end
 end

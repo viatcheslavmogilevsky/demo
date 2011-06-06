@@ -8,6 +8,7 @@
   <body>
     <div class="container">
      <%= render 'layouts/head' %>
+     <%= javascript_include_tag :defaults %>
      <section class="round">
        <% flash.each do |key, value| %>
            <div class="flash <%= key %>"><%= value %></div>
