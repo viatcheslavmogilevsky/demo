@@ -9,6 +9,7 @@
         <table class="microposts" summary="User microposts">
           <%= render @microposts %>
         </table>
+	<%=  paginate @microposts%>
       <% end %>
     </td>
     <td class="sidebar round">
