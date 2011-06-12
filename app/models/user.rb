@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
            :length => {:within => 6..40}
  before_save :encr_pass
  
+ def feed
+  Micropost.where("user_id = ?", id)
+ end
+
  def has_password?(submitted_pass)
   enc_pass == enc(submitted_pass)
  end

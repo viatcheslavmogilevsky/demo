@@ -58,9 +58,7 @@ before_filter :admin_user,   :only => :destroy
  
   private
 
-    def authenticate
-      deny_access unless signed_in?
-    end
+ 
     
   
     def correct_user

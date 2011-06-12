@@ -1,5 +1,6 @@
 class MicropostsController < ApplicationController
   before_filter :authorized_user, :only => :destroy
+  before_filter :authenticate
   
 
   def create
@@ -8,6 +9,7 @@ class MicropostsController < ApplicationController
       flash[:success] = "Micropost created!"
       redirect_to root_path
     else
+      @feed_items = []     
       render 'pages/home'
     end
   end
