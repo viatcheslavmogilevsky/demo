@@ -3,7 +3,9 @@ class PagesController < ApplicationController
     @title = "Home"
     if signed_in?
       @micropost = Micropost.new 
-      @feed_items = current_user.feed.page(params[:page])
+      #@feed_items = current_user.feed.page(params[:page])
+      @feed_items = Micropost.order(:created_at).page params[:page] 
+
     end
   end
   
