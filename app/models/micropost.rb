@@ -1,9 +1,9 @@
 class Micropost < ActiveRecord::Base
 
- attr_accessible :content  
+ attr_accessible :content, :data  
  belongs_to :user
   
- paginates_per 5
+ paginates_per 10
  
  validates :content, :presence => true, :length => { :maximum => 140 }
  validates :user_id, :presence => true
