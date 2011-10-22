@@ -2,6 +2,8 @@ require 'digest'
 class User < ActiveRecord::Base
  has_many :microposts, :dependent => :destroy
  has_many :events, :dependent => :destroy
+ has_many :ign_items, :dependent => :destroy
+ has_many :favorites, :dependent => :destroy
  attr_accessor :password
  attr_accessible :name, :email, :password, :password_confirmation 
 
