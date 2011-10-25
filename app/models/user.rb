@@ -4,9 +4,11 @@ class User < ActiveRecord::Base
  has_many :events, :dependent => :destroy
  has_many :ign_items, :dependent => :destroy
  has_many :favorites, :dependent => :destroy
+ has_many :received, :dependent => :destroy
  attr_accessor :password
  attr_accessible :name, :email, :password, :password_confirmation 
-
+ scope :random, :order=>'RANDOM()', :limit=>1
+ 
   paginates_per 30
 
  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -16,7 +18,7 @@ class User < ActiveRecord::Base
            
  validates :email, :presence => true,
                    :format => {:with => email_regex},
-		   :uniqueness => {:case_sensitive => false}
+                   :uniqueness => {:case_sensitive => false}
  
  validates :password, :presence => true,
            :confirmation =>  true,
@@ -40,7 +42,11 @@ class User < ActiveRecord::Base
  def self.authenticate_with_salt(id, cookie_salt)
     user = find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
-  end
+ end
+
+ def receive_message(message)
+  self.received_microposts.build(message)
+ end
 
  private
   def enc(string)

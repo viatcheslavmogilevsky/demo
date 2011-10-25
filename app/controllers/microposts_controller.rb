@@ -6,7 +6,14 @@ class MicropostsController < ApplicationController
   def create
     @micropost  = current_user.microposts.build(params[:micropost])
     if @micropost.save
-      flash[:success] = "Micropost created!"
+      user = User.random
+      #user.receive_message(@micropost)
+      flash[:success] = "Micropost created (at #{user.id})!"
+#      while user.ign_items.include?(current_user.id)
+#
+#
+#       user = User.random
+#      end
       redirect_to root_path
     else
       @feed_items = []     
@@ -25,4 +32,8 @@ class MicropostsController < ApplicationController
       @micropost = Micropost.find(params[:id])
       redirect_to root_path unless current_user?(@micropost.user)
     end
+
+#    def condition?(user)
+#      user.present? && !user.ign_items.include?(current_user)
+#    end
 end

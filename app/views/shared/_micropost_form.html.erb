@@ -1,9 +1,5 @@
-
 <%= form_for @micropost do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
-  <div class="select">
-    <%= f.date_select :data %>
-  </div>
   <div class="field">
     <%= f.text_area :content %>
   </div>
