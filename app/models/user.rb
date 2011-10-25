@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
  has_many :ign_items, :dependent => :destroy
  has_many :favorites, :dependent => :destroy
  has_many :received, :dependent => :destroy
+ has_many :received_microposts
  attr_accessor :password
  attr_accessible :name, :email, :password, :password_confirmation 
  scope :random, :order=>'RANDOM()', :limit=>1
@@ -45,7 +46,8 @@ class User < ActiveRecord::Base
  end
 
  def receive_message(message)
-  self.received_microposts.build(message)
+    Rails.logger.debug "--#{message.content}__"
+    self.received_microposts.create!(message)
  end
 
  private
