@@ -46,8 +46,7 @@ class User < ActiveRecord::Base
  end
 
  def receive_message(message)
-    Rails.logger.debug "--#{message.content}__"
-    self.received_microposts.create!(message)
+    self.received_microposts.create!(:micropost_id => message.id)
  end
 
  private

@@ -11,6 +11,15 @@
         </table>
 	<%=  paginate @microposts%>
       <% end %>
+    <% unless @user.received_microposts.empty? %>
+        <table class="received_microposts" summary="User received microposts">
+          <% @received_microposts.each do |elem| %>
+            <p> author: <%= elem[:author_name]  %> </p>
+            <p> <%= elem[:content]  %> </p>
+            <p> posted at: <%= elem[:created_at]  %> </p>
+          <% end %>
+        </table>
+      <% end %> 
     </td>
     <td class="sidebar round">
       <strong>Name</strong> <%= @user.name %><br />

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 before_filter :authenticate, :only => [:edit, :update, :index, :destroy]
-before_filter :correct_user, :only => [:edit, :update, :show]
+before_filter :correct_user, :only => [:edit, :update]
 before_filter :admin_user,   :only => :destroy
  
   def new
@@ -16,7 +16,19 @@ before_filter :admin_user,   :only => :destroy
   def show
    @user = User.find(params[:id])
    @microposts = @user.microposts.page params[:page]
-  # @rec_micropots = @user.
+
+
+   @received_microposts = []
+   if  @user.received_microposts.present?
+    @user.received_microposts.each do |rpm|
+         post = Micropost.find(rpm.micropost_id)
+         @received_microposts << {:author_name => post.user.name,
+          :content => post.content,
+          :created_at => post.created_at}
+    end
+   end
+
+
    @title = @user.name
   end
  

@@ -8,7 +8,7 @@ class MicropostsController < ApplicationController
     if @micropost.save
       user = User.random.first
       user.receive_message(@micropost)
-      flash[:success] = "Micropost created (at #{user.id})!"
+      flash[:success] = "Micropost created!"
 #      while user.ign_items.include?(current_user.id)
 #
 #

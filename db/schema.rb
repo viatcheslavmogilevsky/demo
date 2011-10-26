@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111022175935) do
+ActiveRecord::Schema.define(:version => 20111026173814) do
 
   create_table "events", :force => true do |t|
     t.date     "event_date"
@@ -46,9 +46,9 @@ ActiveRecord::Schema.define(:version => 20111022175935) do
 
   create_table "received_microposts", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "micropost_id"
   end
 
   create_table "users", :force => true do |t|
