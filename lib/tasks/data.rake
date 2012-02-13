@@ -17,15 +17,14 @@ namespace :db do
                    :email => email,
                    :password => password,
                    :password_confirmation => password)
-
-     
     end
    User.all(:limit => 6).each do |user|
       50.times do
-        user.microposts.create!(:content => Faker::Lorem.sentence(5))
+        user.microposts.create!(:content => Faker::Lorem.sentence(5),
+                                :calendar_date => Date.today.prev_year+rand(730))
       end
      end
 
- 
+
   end
 end

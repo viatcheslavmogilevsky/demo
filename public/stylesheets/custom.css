@@ -1,22 +1,55 @@
+.task_container
+{
+  overflow: visible;
+}
+.month
+{
+  display: block inline;
+  width: 14%
+}
+
+table.front td
+{
+  vertical-align: top;
+}
+
+.someday
+{
+  background: #E5ECF9 !important;
+}
+
+.otherday
+{
+  color: #aaaaaa;
+}
+
 .container {
-  width: 710px;
+  width: 95%;
 }
 
 body {
-  background: #ccf;
+  background: #EEF3E2;
 }
 
 header {
+  text-align: center;
   padding-top: 20px;
+  margin-bottom: 10px;
+  width: 710px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 header img {
   padding: 1em;
 }
 
+header nav
+{
+  float: none;
+}
 section {
   margin-top: 1em;
-  font-size: 120%;
   padding: 20px;
   background: #fff;
 }

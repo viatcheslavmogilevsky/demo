@@ -2,36 +2,24 @@ class UsersController < ApplicationController
 before_filter :authenticate, :only => [:edit, :update, :index, :destroy]
 before_filter :correct_user, :only => [:edit, :update]
 before_filter :admin_user,   :only => :destroy
- 
+
   def new
     @user = User.new
     @title = "Sign up"
   end
-  
+
   def index
     @title = "All users"
     @users = User.order(:id).page params[:page]
-  end  
+  end
 
   def show
    @user = User.find(params[:id])
    @microposts = @user.microposts.page params[:page]
-
-
-   @received_microposts = []
-   if  @user.received_microposts.present?
-    @user.received_microposts.each do |rpm|
-         post = Micropost.find(rpm.micropost_id)
-         @received_microposts << {:author_name => post.user.name,
-          :content => post.content,
-          :created_at => post.created_at}
-    end
-   end
-
-
    @title = @user.name
+   @dates = @user.dates.map {|elem| elem.calendar_date}
   end
- 
+
 
   def create
    @user = User.new(params[:user])
@@ -41,19 +29,21 @@ before_filter :admin_user,   :only => :destroy
      redirect_to @user
    else
     @title = "Sign up"
-    render 'new' 
+    render 'new'
    end
   end
 
-  def edit 
-    @user = User.find(params[:id])
+  def edit
     @title = "Edit user"
   end
 
-  
-  
-  def update
+  def events_for
     @user = User.find(params[:id])
+    @feed_items= @user.microposts.events_for(Date.new(params[:year].to_i,params[:month].to_i,params[:day].to_i))
+    render 'shared/_feed'
+  end
+
+  def update
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated."
       redirect_to @user
@@ -62,23 +52,23 @@ before_filter :admin_user,   :only => :destroy
       render 'edit'
     end
   end
- 
+
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
-    redirect_to users_path 
+    redirect_to users_path
   end
- 
+
   private
 
- 
-    
-  
+
+
+
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_path) unless current_user?(@user)
     end
-   
+
     def admin_user
       redirect_to(root_path) unless current_user.admin?
     end

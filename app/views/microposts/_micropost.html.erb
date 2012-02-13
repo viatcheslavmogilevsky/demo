@@ -1,11 +1,15 @@
 <tr>
   <td class="micropost">
-    <span class="content"><%= micropost.content %></span>
+    <%= link_to edit_micropost_path(micropost) do %>
+      <span class="timestamp">
+      <%= micropost.calendar_date %>
+    </span>
+    <span class="content"><%= raw(micropost.content) %></span>
     <span class="timestamp">
       Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     </span>
+  <% end %>
   </td>
-   </td>
     <% user = micropost.user rescue User.find(micropost.user_id) %>
     <% if current_user?(user) %>
   <td>

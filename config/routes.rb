@@ -1,10 +1,19 @@
 SampleApp::Application.routes.draw do
-  
-  
 
-  resources :users
+
+
+  resources :users do
+    member do
+      get ':year/:month/:day', :action => :events_for
+    end
+  end
+
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :microposts, :only => [:create, :destroy]
+  resources :microposts, :only => [:create, :destroy, :update, :edit] do
+    collection do
+      get ':year/:month/:day', :action => :events_for
+    end
+  end
   resources :events, :only => [:create, :destroy]
 
  # get "pages/home"
@@ -18,8 +27,8 @@ SampleApp::Application.routes.draw do
   match '/contact', :to => 'pages#contact', :as => 'contact'
   match '/about',   :to => 'pages#about', :as => 'about'
   match '/help',    :to => 'pages#help', :as => 'help'
-  match '/signin', :to => 'sessions#new', :as => 'signin' 
-  match '/signout', :to => 'sessions#destroy', :as => 'signout' 
+  match '/signin', :to => 'sessions#new', :as => 'signin'
+  match '/signout', :to => 'sessions#destroy', :as => 'signout'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

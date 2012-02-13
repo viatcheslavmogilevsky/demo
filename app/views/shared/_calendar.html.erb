@@ -1,0 +1,5 @@
+<div class="calendar">
+  <% unless @dates.empty? %>
+    <%= raw(scatter(@dates,_controller)) %>
+  <% end %>
+</div>

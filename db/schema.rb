@@ -10,46 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026173814) do
-
-  create_table "events", :force => true do |t|
-    t.date     "event_date"
-    t.string   "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-  end
-
-  create_table "favorites", :force => true do |t|
-    t.integer  "favorite_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "ign_items", :force => true do |t|
-    t.integer  "ign_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20120131103130) do
 
   create_table "microposts", :force => true do |t|
     t.string   "content"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "receiver_id"
+    t.date     "calendar_date"
   end
 
   add_index "microposts", ["user_id"], :name => "index_microposts_on_user_id"
-
-  create_table "received_microposts", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "micropost_id"
-  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

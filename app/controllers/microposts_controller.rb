@@ -1,22 +1,31 @@
 class MicropostsController < ApplicationController
   before_filter :authorized_user, :only => :destroy
   before_filter :authenticate
-  
+
+  def edit
+    @title = "Edit micropost"
+    @micropost = Micropost.find(params[:id])
+    session[:return_to] ||= request.referer
+  end
+
+  def update
+    @micropost = Micropost.find(params[:id])
+    if @micropost.update_attributes(params[:micropost])
+      flash[:success] = "Micropost updated."
+      redirect_to session[:return_to]
+    else
+      @title = "Edit micropost"
+      render 'edit'
+    end
+  end
 
   def create
     @micropost  = current_user.microposts.build(params[:micropost])
     if @micropost.save
-      user = User.random.first
-      user.receive_message(@micropost)
       flash[:success] = "Micropost created!"
-#      while user.ign_items.include?(current_user.id)
-#
-#
-#       user = User.random
-#      end
       redirect_to root_path
     else
-      @feed_items = []     
+      @feed_items = []
       render 'pages/home'
     end
   end
@@ -26,6 +35,11 @@ class MicropostsController < ApplicationController
    redirect_to root_path
   end
 
+  def events_for
+    @feed_items = Micropost.events_for(Date.new(params[:year].to_i,params[:month].to_i,params[:day].to_i)).page(params[:page])
+    render 'shared/_feed'
+  end
+
   private
 
     def authorized_user
@@ -33,7 +47,4 @@ class MicropostsController < ApplicationController
       redirect_to root_path unless current_user?(@micropost.user)
     end
 
-#    def condition?(user)
-#      user.present? && !user.ign_items.include?(current_user)
-#    end
 end
