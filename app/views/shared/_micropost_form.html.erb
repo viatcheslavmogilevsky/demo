@@ -1,3 +1,4 @@
+<h2 class="micropost">What's up?</h2>
 <%= form_for @micropost do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
@@ -7,6 +8,6 @@
     <%= f.date_select :calendar_date %>
   </div>
   <div class="actions">
-    <%= f.submit "Submit" %>
+    <%= f.submit "Create event" %>
   </div>
 <% end %>

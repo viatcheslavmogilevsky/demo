@@ -14,17 +14,10 @@ module ApplicationHelper
    event_count = 1
    global_res = ''
    args.each do |arg|
-     if current_year != arg.year
+     if current_year != arg.year or current_month != arg.month
        global_res << finish_month(current_year,current_month,current_day,event_count,_controller)
-       global_res << finish_year(current_year)
-       global_res << start_year(arg)
        global_res << start_month(arg)
        current_year,current_month,current_day = arg.year, arg.month, arg.day
-       event_count = 1
-     elsif current_month != arg.month
-       global_res << finish_month(current_year,current_month,current_day,event_count,_controller)
-       global_res << start_month(arg)
-       current_month,current_day = arg.month, arg.day
        event_count = 1
      elsif current_day != arg.day
        global_res << finish_month_to(arg.day, current_year, current_month, current_day, event_count,_controller)
@@ -35,7 +28,6 @@ module ApplicationHelper
      end
    end
    global_res << finish_month(current_year,current_month,current_day,event_count,_controller)
-   global_res << finish_year(current_year)
  end
 
  private
@@ -78,15 +70,10 @@ module ApplicationHelper
  end
 
  def start_month(date)
-   res = %(<table class="month"> <colgroup span="7"> </colgroup>)
-   res << %(<tr><td>#{Date::MONTHNAMES[date.month]}</td></tr>)
+   res = %(<table class="month">)
+   res << show_month_head("#{Date::MONTHNAMES[date.month]}-#{date.year}")
    res << show_prev_month(date)
    res << show_current_month_to(date)
- end
-
- def finish_year(year)
-   return "" unless year
-   %(</div>)
  end
 
  def finish_month(year, month, day, count,_controller)
@@ -95,14 +82,14 @@ module ApplicationHelper
    res = show_current_day(date,count,_controller)
    res << show_current_month(date)
    res << show_next_month(date)
-   res << %(</table>)
+   res << %(</tbody></table>)
  end
 
  def show_current_day(day,count,_controller)
    res = ''
    res << %(<tr>) if day.monday?
    res <<  %(<td class ="iday">)
-   res << link_to(%[#{day.day} (#{count})],:controller =>_controller, :action => :events_for, :year => day.year, :month => day.month, :day => day.day )
+   res << link_to(%[#{day.day}(#{count})],:controller =>_controller, :action => :events_for, :year => day.year, :month => day.month, :day => day.day )
    res << %(</td>)
    res << %(</tr>) if day.sunday?
    res
@@ -131,7 +118,9 @@ module ApplicationHelper
    res << %(</tr>)
  end
 
- def start_year(date)
-   %(<div class ="year"><h1> #{date.year} </h1>)
+ def show_month_head(name)
+ #  res = %(<thead><tr><th>#{name}</th></tr>)
+   res = %(<h6>#{name}</h6>)
+   res << %(<thead><tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody>)
  end
 end

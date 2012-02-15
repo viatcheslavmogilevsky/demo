@@ -3,7 +3,7 @@ class Micropost < ActiveRecord::Base
  attr_accessible :content, :calendar_date
  belongs_to :user
 
-# paginates_per 10
+ paginates_per 10
 
  validates :content, :presence => true, :length => { :maximum => 140 }
  validates :user_id, :presence => true

@@ -1,41 +1,57 @@
-.task_container
-{
-  overflow: visible;
-}
-.month
-{
-  display: block inline;
-  width: 14%
-}
-
 table.front td
 {
   vertical-align: top;
 }
 
-.someday
+table.microposts td
 {
-  background: #E5ECF9 !important;
+  vertical-align: middle;
 }
 
+table.month
+{
+  border-spacing: 1px;
+}
+
+.pagination
+{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+table.month td
+{
+/*  background: #E5ECF9 !important;*/
+  padding: 1px;
+  margin: 1px;
+}
+.someday
+{
+  background: #76EEC6 !important;
+}
 .otherday
 {
   color: #aaaaaa;
+  background: #F0F8FF !important;
 }
-
+.iday
+{
+  background: #66CDAA !important;
+}
 .container {
   width: 95%;
 }
 
 body {
-  background: #EEF3E2;
+  background: #F1EDC2;
 }
 
 header {
   text-align: center;
   padding-top: 20px;
   margin-bottom: 10px;
-  width: 710px;
+  width: 30%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -123,13 +139,17 @@ a.signup_button {
 }
 
 
-
+.round {
+  -moz-border-radius:    10px;
+  -webkit-border-radius: 10px;
+  border-radius:         10px;
+}
 
 
 footer {
   text-align: center;
   margin-top: 10px;
-  width: 710px;
+  width: 30%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -268,6 +288,6 @@ form.new_micropost {
 }
 
 form.new_micropost textarea {
-  height: 4em;
-  margin-bottom: 0;
+  height: 8em;
+  width: 90%
 }

@@ -14,10 +14,13 @@ before_filter :admin_user,   :only => :destroy
   end
 
   def show
-   @user = User.find(params[:id])
-   @microposts = @user.microposts.page params[:page]
-   @title = @user.name
-   @dates = @user.dates.map {|elem| elem.calendar_date}
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.page params[:page]
+    @title = @user.name
+    @dates = @user.dates.map {|elem| elem.calendar_date}
+    if current_user?(@user)
+      @micropost = Micropost.new
+    end
   end
 
 
@@ -39,7 +42,7 @@ before_filter :admin_user,   :only => :destroy
 
   def events_for
     @user = User.find(params[:id])
-    @feed_items= @user.microposts.events_for(Date.new(params[:year].to_i,params[:month].to_i,params[:day].to_i))
+    @feed_items = @user.microposts.events_for(Date.new(params[:year].to_i,params[:month].to_i,params[:day].to_i)).page params[:page]
     render 'shared/_feed'
   end
 
