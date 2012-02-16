@@ -11,6 +11,7 @@ table.microposts td
 table.month
 {
   border-spacing: 1px;
+  display: none;
 }
 
 .pagination

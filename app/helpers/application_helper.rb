@@ -70,8 +70,7 @@ module ApplicationHelper
  end
 
  def start_month(date)
-   res = %(<table class="month">)
-   res << show_month_head("#{Date::MONTHNAMES[date.month]}-#{date.year}")
+   res = show_month_head("#{Date::MONTHNAMES[date.month]}-#{date.year}")
    res << show_prev_month(date)
    res << show_current_month_to(date)
  end
@@ -120,7 +119,8 @@ module ApplicationHelper
 
  def show_month_head(name)
  #  res = %(<thead><tr><th>#{name}</th></tr>)
-   res = %(<h6>#{name}</h6>)
-   res << %(<thead><tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody>)
+  # res << %(<table class="month">)
+   res = %(<h6 class="month_link" id="#{name}">#{name}</h6>)
+   res << %(<table class="month" id="_#{name}"><thead><tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody>)
  end
 end
