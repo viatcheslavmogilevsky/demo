@@ -5,6 +5,7 @@ window.onload = function(){
   $$('.month_link').each(function(each_link){
     each_link.onclick = function() {
       if(current_table) current_table.style.display = 'none';
+      x = $("_"+each_link.id)
       x.style.display = 'block';
       current_table = x;
     }});
