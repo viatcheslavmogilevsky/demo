@@ -4,7 +4,8 @@ var current_table = null;
 window.onload = function(){
   $$('.month_link').each(function(each_link){
     each_link.onclick = function() {
-      if(current_table){ current_table.style.display = 'none';
+      if(current_table) current_table.style.display = 'none';
+      x.style.display = 'block';
       current_table = x;
     }});
 
