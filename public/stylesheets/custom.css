@@ -1,3 +1,18 @@
+.month_link:hover
+{
+  cursor: pointer;
+}
+
+.calendar
+{
+  width: 260px;
+}
+
+.edit_link
+{
+  float: right;
+  margin: 5px;
+}
 table.front td
 {
   vertical-align: top;
@@ -11,7 +26,11 @@ table.microposts td
 table.month
 {
   border-spacing: 1px;
-  display: none;
+}
+
+div.month
+{
+  /* display: none; */
 }
 
 .pagination

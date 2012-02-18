@@ -13,13 +13,14 @@
     <span class="timestamp">
       Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
     </span>
- </td>
- <% if current_user?(feed_item.user) %>
-  <td>
-   <%= link_to "delete", feed_item, :method => :delete,
+    <% if current_user?(feed_item.user) %>
+     <%= link_to "delete", feed_item, :method => :delete,
                                     :confirm => "You sure?",
-				    :title => feed_item.content %>
+                                    :title => feed_item.content,
+                                    :class => "edit_link"%>
+     <%= link_to "change", edit_micropost_path(feed_item),
+                                    :class => "edit_link"%>
+    <% end %>
   </td>
- <% end %>
 </tr>
 

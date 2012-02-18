@@ -81,7 +81,7 @@ module ApplicationHelper
    res = show_current_day(date,count,_controller)
    res << show_current_month(date)
    res << show_next_month(date)
-   res << %(</tbody></table>)
+   res << %(</tbody></table></div>)
  end
 
  def show_current_day(day,count,_controller)
@@ -121,6 +121,6 @@ module ApplicationHelper
  #  res = %(<thead><tr><th>#{name}</th></tr>)
   # res << %(<table class="month">)
    res = %(<h6 class="month_link" id="#{name}">#{name}</h6>)
-   res << %(<table class="month" id="_#{name}"><thead><tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody>)
+   res << %(<div id="_#{name}" class="month" style="display: none"><table class="month"><thead><tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody>)
  end
 end

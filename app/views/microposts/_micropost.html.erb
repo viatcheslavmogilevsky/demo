@@ -1,21 +1,18 @@
 <tr>
   <td class="micropost">
-    <%= link_to edit_micropost_path(micropost) do %>
-      <span class="timestamp">
+    <span class="timestamp">
       <%= micropost.calendar_date %>
     </span>
-    <span class="content"><%= raw(micropost.content) %></span>
+    <span class="content"><%= micropost.content %></span>
     <span class="timestamp">
       Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     </span>
-  <% end %>
+    <% if current_user?(micropost.user) %>
+      <%= link_to "delete", micropost, :method => :delete,
+                                       :confirm => "You sure?",
+                                       :title => micropost.content,
+                                       :class => "edit_link"%>
+      <%= link_to "change", edit_micropost_path(micropost), :class => "edit_link" %>
+    <% end %>
   </td>
-    <% user = micropost.user rescue User.find(micropost.user_id) %>
-    <% if current_user?(user) %>
-  <td>
-    <%= link_to "delete", micropost, :method => :delete,
-                                     :confirm => "You sure?",
-                                     :title => micropost.content %>
-  </td>
-  <% end %>
 </tr>
