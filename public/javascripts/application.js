@@ -5,13 +5,15 @@ window.onload = function(){
     each_link.is_red = false;
     each_link.onclick = function() {
       if(each_link.is_red) {Effect.SlideUp("_"+each_link.id, {duration: 0.5});
-      each_link.style.color = '';
-      each_link.is_red = false;}
+        each_link.style.color = '';
+        each_link.is_red = false;}
       else {
         Effect.SlideDown("_"+each_link.id,{ duration: 0.5 });
         each_link.style.color = 'red';
         each_link.is_red = true;
       }
     }
- });
+  });
 }
+
+

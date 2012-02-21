@@ -1,6 +1,7 @@
 .month_link:hover
 {
   cursor: pointer;
+  background-color: #ECF1EF;
 }
 
 .calendar
@@ -13,6 +14,12 @@
   float: right;
   margin: 5px;
 }
+
+table.profile td
+{
+  vertical-align: top;
+}
+
 table.front td
 {
   vertical-align: top;

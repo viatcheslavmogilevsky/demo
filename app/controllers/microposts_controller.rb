@@ -5,14 +5,22 @@ class MicropostsController < ApplicationController
   def edit
     @title = "Edit micropost"
     @micropost = Micropost.find(params[:id])
-    session[:return_to] ||= request.referer
+    respond_to do |format|
+      format.html {session[:return_to] ||= request.referer}
+      format.js
+    end
   end
 
   def update
     @micropost = Micropost.find(params[:id])
     if @micropost.update_attributes(params[:micropost])
-      flash[:success] = "Micropost updated."
-      redirect_to session[:return_to]
+    #  respond_to do |format|
+    #    format.html {
+          flash[:success] = "Micropost updated."
+          redirect_to session[:return_to]
+    #    }
+    #    format.js
+   #   end
     else
       @title = "Edit micropost"
       render 'edit'
@@ -31,13 +39,21 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
-   @micropost.destroy
-   redirect_to root_path
+    @micropost.destroy
+    @event_id = params[:id]
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js
+    end
+
   end
 
   def events_for
     @feed_items = Micropost.events_for(Date.new(params[:year].to_i,params[:month].to_i,params[:day].to_i)).page(params[:page])
-    render 'shared/_feed'
+    respond_to do |format|
+      format.html { render 'shared/_feed' }
+      format.js
+    end
   end
 
   private

@@ -13,12 +13,14 @@
       <% if @micropost.present? %>
         <%= render 'shared/micropost_form' %>
       <% end %>
+      <div id="feed">
       <% unless @user.microposts.empty? %>
         <table class="microposts" summary="User microposts">
           <%= render @microposts %>
         </table>
 	<%=  paginate @microposts%>
       <% end %>
+      </div>
     </td>
     <td>
       <%= render :partial => 'shared/calendar', :locals => {:_controller => :users} %>

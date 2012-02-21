@@ -6,7 +6,9 @@
       </td>
       <td class="main">
         <%= render 'shared/micropost_form' %>
-        <%= render 'shared/feed' %>
+        <div id="feed">
+          <%= render 'shared/feed' %>
+        </div>
       </td>
       <td>
         <%= render :partial => 'shared/calendar', :locals => {:_controller => :microposts} %>

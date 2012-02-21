@@ -88,7 +88,7 @@ module ApplicationHelper
    res = ''
    res << %(<tr>) if day.monday?
    res <<  %(<td class ="iday">)
-   res << link_to(%[#{day.day}(#{count})],:controller =>_controller, :action => :events_for, :year => day.year, :month => day.month, :day => day.day )
+   res << link_to(%[#{day.day}(#{count})],{:controller =>_controller, :action => :events_for, :year => day.year, :month => day.month, :day => day.day}, :remote => true)
    res << %(</td>)
    res << %(</tr>) if day.sunday?
    res

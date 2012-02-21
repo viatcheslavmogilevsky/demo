@@ -43,7 +43,10 @@ before_filter :admin_user,   :only => :destroy
   def events_for
     @user = User.find(params[:id])
     @feed_items = @user.microposts.events_for(Date.new(params[:year].to_i,params[:month].to_i,params[:day].to_i)).page params[:page]
-    render 'shared/_feed'
+    respond_to do |format|
+      format.html {render 'shared/_feed'}
+      format.js {render 'microposts/events_for'}
+    end
   end
 
   def update

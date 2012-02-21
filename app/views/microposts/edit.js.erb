@@ -1,0 +1,4 @@
+//$("<%= "event-"+@micropost.id.to_s %>").childElements().each(function(each_child){ each_child.hide(); });
+var edit_div = new Element('div', {class: 'edit_div'});
+edit_div.update("<%= render "shared/micropost_form" %>");
+$("<%= "event-"+@micropost.id.to_s %>").insert({ bottom: edit_div });

@@ -1,26 +1,26 @@
-<tr>
+<tr id="<%= 'event-'+feed_item.id.to_s %>">
   <td class="gravatar">
-    <%= link_to gravatar_for(feed_item.user), feed_item.user %>
+      <%= link_to gravatar_for(feed_item.user), feed_item.user %>
   </td>
   <td class="micropost">
-    <span class="user">
-      <%= link_to feed_item.user.name, feed_item.user %>
-    </span>
-    <span class="timestamp">
-      <%= feed_item.calendar_date %>
-    </span>
-    <span class="content"><%=raw(feed_item.content) %></span>
-    <span class="timestamp">
-      Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
-    </span>
-    <% if current_user?(feed_item.user) %>
-     <%= link_to "delete", feed_item, :method => :delete,
+      <span class="user">
+        <%= link_to feed_item.user.name, feed_item.user %>
+      </span>
+      <span class="timestamp">
+        <%= feed_item.calendar_date %>
+      </span>
+      <span class="content"><%=raw(feed_item.content) %></span>
+      <span class="timestamp">
+        Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
+      </span>
+      <% if current_user?(feed_item.user) %>
+       <%= link_to "delete", feed_item, :method => :delete,
                                     :confirm => "You sure?",
-                                    :title => feed_item.content,
-                                    :class => "edit_link"%>
-     <%= link_to "change", edit_micropost_path(feed_item),
-                                    :class => "edit_link"%>
-    <% end %>
+                                    :class => "edit_link",
+                                    :remote => true %>
+       <%= link_to "change", edit_micropost_path(feed_item),
+         :class => "edit_link change_link", :id => "change-"+feed_item.id.to_s  %>
+      <% end %>
   </td>
 </tr>
 
