@@ -13,6 +13,9 @@
 {
   float: right;
   margin: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  background-color: #BDBDBD;
 }
 
 table.profile td
@@ -165,7 +168,7 @@ a.signup_button {
 }
 
 
-.round {
+.round, .edit_link {
   -moz-border-radius:    10px;
   -webkit-border-radius: 10px;
   border-radius:         10px;

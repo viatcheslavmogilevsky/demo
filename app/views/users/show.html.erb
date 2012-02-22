@@ -14,12 +14,7 @@
         <%= render 'shared/micropost_form' %>
       <% end %>
       <div id="feed">
-      <% unless @user.microposts.empty? %>
-        <table class="microposts" summary="User microposts">
-          <%= render @microposts %>
-        </table>
-	<%=  paginate @microposts%>
-      <% end %>
+        <%= render 'shared/microposts' %>
       </div>
     </td>
     <td>

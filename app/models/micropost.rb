@@ -5,7 +5,7 @@ class Micropost < ActiveRecord::Base
 
  paginates_per 10
 
- validates :content, :presence => true, :length => { :maximum => 140 }
+ validates :content, :presence => true
  validates :user_id, :presence => true
  validates :calendar_date, :presence => true
 

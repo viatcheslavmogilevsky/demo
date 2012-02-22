@@ -14,13 +14,8 @@ class MicropostsController < ApplicationController
   def update
     @micropost = Micropost.find(params[:id])
     if @micropost.update_attributes(params[:micropost])
-    #  respond_to do |format|
-    #    format.html {
           flash[:success] = "Micropost updated."
           redirect_to session[:return_to]
-    #    }
-    #    format.js
-   #   end
     else
       @title = "Edit micropost"
       render 'edit'
@@ -34,6 +29,7 @@ class MicropostsController < ApplicationController
       redirect_to root_path
     else
       @feed_items = []
+      @dates = []
       render 'pages/home'
     end
   end
