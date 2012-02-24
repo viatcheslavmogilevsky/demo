@@ -1,21 +1,44 @@
+table.microposts tr td.micropost span.calendar_date {
+  display: block;
+}
+
+table.microposts tr td.micropost span.content {
+  display: block;
+}
+
 .month_link:hover
 {
   cursor: pointer;
-  background-color: #ECF1EF;
+  background-color: #C2C2C2;
+}
+
+.month_link
+{
+  display: block;
 }
 
 .calendar
 {
   width: 260px;
+  padding: 5px;
+  background-color: #F2F2F2;
 }
 
 .edit_link
 {
   float: right;
-  margin: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
   padding-right: 5px;
   padding-left: 5px;
   background-color: #BDBDBD;
+  border: 1px solid transparent;
+}
+
+.edit_link:hover
+{
+  background-color: #E3E3E3;
+  border-color: #000;
 }
 
 table.profile td
@@ -31,6 +54,7 @@ table.front td
 table.microposts td
 {
   vertical-align: middle;
+  background: #FFF !important;
 }
 
 table.month
@@ -38,10 +62,6 @@ table.month
   border-spacing: 1px;
 }
 
-div.month
-{
-  /* display: none; */
-}
 
 .pagination
 {
@@ -168,7 +188,7 @@ a.signup_button {
 }
 
 
-.round, .edit_link {
+.round, .edit_link, .calendar {
   -moz-border-radius:    10px;
   -webkit-border-radius: 10px;
   border-radius:         10px;
@@ -291,7 +311,6 @@ table.microposts tr td.micropost {
 }
 
 table.microposts tr td.micropost span.timestamp {
-  display: block;
   font-size: 85%;
   color: #666;
 }

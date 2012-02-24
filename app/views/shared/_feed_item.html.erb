@@ -6,8 +6,8 @@
       <span class="user">
         <%= link_to feed_item.user.name, feed_item.user %>
       </span>
-      <span class="timestamp">
-        <%= feed_item.calendar_date %>
+      <span class="calendar_date">
+        <%= inspect_date(feed_item.calendar_date) %>
       </span>
       <span class="content"><%=raw(feed_item.content) %></span>
       <span class="timestamp">

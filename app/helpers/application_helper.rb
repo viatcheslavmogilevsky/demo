@@ -30,6 +30,13 @@ module ApplicationHelper
    global_res << finish_month(current_year,current_month,current_day,event_count,_controller)
  end
 
+ def inspect_date(date)
+   return 'Today' if date.today?
+   return 'Tomorrow' if date.prev_day.today?
+   return 'Yesterday' if date.next_day.today?
+   date.inspect
+ end
+
  private
 
  def finish_month_to(day, year, month,start_day,count,_controller)
@@ -118,9 +125,7 @@ module ApplicationHelper
  end
 
  def show_month_head(name)
- #  res = %(<thead><tr><th>#{name}</th></tr>)
-  # res << %(<table class="month">)
-   res = %(<h6 class="month_link" id="#{name}">#{name}</h6>)
+   res = %(<a class="month_link" id="#{name}">#{name}</a>)
    res << %(<div id="_#{name}" class="month" style="display: none"><table class="month"><thead><tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody>)
  end
 end
