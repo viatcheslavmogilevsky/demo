@@ -1,4 +1,6 @@
-//$("<%= "event-"+@micropost.id.to_s %>").childElements().each(function(each_child){ each_child.hide(); });
+$("<%= "event-"+@micropost.id.to_s %>").childElements().each(function(each_child){ each_child.hide(); });
 var edit_div = new Element('div', {class: 'edit_div'});
-edit_div.update("<%= render "shared/micropost_form" %>");
+edit_div.update("<%= escape_javascript(render("shared/micropost_form")) %>");
+edit_div.style.display = 'none';
 $("<%= "event-"+@micropost.id.to_s %>").insert({ bottom: edit_div });
+Effect.SlideDown(edit_div, {duration: 2.0});

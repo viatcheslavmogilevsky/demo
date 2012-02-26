@@ -44,10 +44,10 @@ module ApplicationHelper
    res = show_current_day(date,count,_controller)
    date= date.next_day
    while date.day != day
-    res << %(<tr>) if date.monday?
-    res << %(<td class ="someday">#{date.day}</td>)
-    res << %(</tr>) if date.sunday?
-    date = date.next_day
+     res << %(<tr>) if date.monday?
+     res << %(<td class ="someday">#{date.day}</td>)
+     res << %(</tr>) if date.sunday?
+     date = date.next_day
    end
    res
  end
@@ -125,7 +125,7 @@ module ApplicationHelper
  end
 
  def show_month_head(name)
-   res = %(<a class="month_link" id="#{name}">#{name}</a>)
-   res << %(<div id="_#{name}" class="month" style="display: none"><table class="month"><thead><tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody>)
+   res = %(<a class="month_link">#{name}</a>)
+   res << %(<div id="#{name}" class="month" style="display: none"><table class="month"><thead><tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody>)
  end
 end

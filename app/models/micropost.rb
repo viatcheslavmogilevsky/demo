@@ -9,7 +9,6 @@ class Micropost < ActiveRecord::Base
  validates :user_id, :presence => true
  validates :calendar_date, :presence => true
 
-# default_scope where('calendar_date')
  scope :may, :order => "calendar_date ASC", :select => :calendar_date
  scope :events_for, lambda { |date| where("calendar_date = ?", date) }
 

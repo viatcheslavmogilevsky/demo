@@ -10,8 +10,8 @@
     <% if current_user?(micropost.user) %>
       <%= link_to "delete", micropost, :method => :delete,
                                        :confirm => "You sure?",
-                                       :title => micropost.content,
-                                       :class => "edit_link"%>
+                                       :class => "edit_link",
+                                       :remote => true %>
       <%= link_to "change", edit_micropost_path(micropost), :class => "edit_link" %>
     <% end %>
   </td>

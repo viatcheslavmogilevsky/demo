@@ -7,8 +7,8 @@ describe User do
 
     before(:each) do
       @user = User.create(@attr)
-      @mp1 = Factory(:micropost, :user => @user, :created_at => 1.day.ago)
-      @mp2 = Factory(:micropost, :user => @user, :created_at => 1.hour.ago)
+      @mp1 = Factory(:micropost, :user => @user, :created_at => 1.day.ago, :calendar_date => Date.today.prev_year+rand(730))
+      @mp2 = Factory(:micropost, :user => @user, :created_at => 1.hour.ago, :calendar_date => Date.today.prev_year+rand(730))
     end
 
     it "should have a microposts attribute" do
@@ -18,7 +18,7 @@ describe User do
     it "should have the right microposts in the right order" do
       @user.microposts.should == [@mp2, @mp1]
     end
-   
+
     describe "status feed" do
 
       it "should have a feed" do
@@ -32,7 +32,7 @@ describe User do
 
       it "should not include a different user's microposts" do
        mp3 = Factory(:micropost,
-        :user => Factory(:user, :email => Factory.next(:email)))
+        :user => Factory(:user, :email => Factory.next(:email)), :calendar_date => Date.new(2011,3,6))
        @user.feed.include?(mp3).should be_false
       end
 
@@ -42,8 +42,8 @@ describe User do
 
 
   before(:each) do
-    @attr = { :name => "Example User", 
-	      :email => "user@example.com", 
+    @attr = { :name => "Example User",
+	      :email => "user@example.com",
               :password => "foobar",
               :password_confirmation => "foobar"
 		}
@@ -55,14 +55,14 @@ describe User do
 
   it "should require a name"  do
     no_name_user = User.new(@attr.merge(:name => ""))
-    no_name_user.should_not be_valid 
+    no_name_user.should_not be_valid
   end
 
   it "should reject names that are too long" do
     long_name = "a"*51
     long_name_user = User.new(@attr.merge(:name => long_name))
-    long_name_user.should_not be_valid 
-  end 
+    long_name_user.should_not be_valid
+  end
 
   it "should accept valid email addresses" do
     addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
@@ -79,7 +79,7 @@ describe User do
       invalid_email_user.should_not be_valid
     end
   end
-  
+
   it "should reject email addresses identical up to case" do
     upcased_email = @attr[:email].upcase
     User.create!(@attr.merge(:email => upcased_email))
@@ -133,13 +133,13 @@ describe User do
 
            it "should be true if the passwords match" do
               @user.has_password?(@attr[:password]).should be_true
-           end    
+           end
 
            it "should be false if the passwords don't match" do
               @user.has_password?("invalid").should be_false
-           end 
+           end
         end
-	
+
 	describe "authenticate method" do
 
    	   it "should return nil on email/password mismatch" do
@@ -162,7 +162,7 @@ describe User do
 
 
 
-     end 
+     end
 
   describe "admin attribute" do
 

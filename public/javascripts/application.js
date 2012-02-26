@@ -4,14 +4,12 @@ window.onload = function(){
   $$('.month_link').each(function(each_link){
     each_link.is_red = false;
     each_link.onclick = function() {
-      if(each_link.is_red) {Effect.SlideUp("_"+each_link.id, {duration: 0.5});
+      if(each_link.is_red) {Effect.SlideUp(each_link.text, {duration: 0.5});
         each_link.style.color = '';
         each_link.is_red = false;}
-      else {
-        Effect.SlideDown("_"+each_link.id,{ duration: 0.5 });
+      else {Effect.SlideDown(each_link.text,{ duration: 0.5 });
         each_link.style.color = 'red';
-        each_link.is_red = true;
-      }
+        each_link.is_red = true;}
     }
   });
 }

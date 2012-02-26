@@ -4,7 +4,7 @@ describe Micropost do
 
   before(:each) do
     @user = Factory(:user)
-    @attr = { :content => "value for content" }
+    @attr = { :content => "value for content", :calendar_date => Date.new(2007,12,7)}
   end
 
   it "should create a new instance given valid attributes" do
