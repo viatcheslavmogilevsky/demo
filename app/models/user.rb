@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
  end
 
  def dates
-  self.microposts.may
+  Micropost.where("user_id = ?", id).order("calendar_date ASC").select(:calendar_date)
  end
 
  def has_password?(submitted_pass)
